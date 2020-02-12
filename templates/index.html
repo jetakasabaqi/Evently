@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Evently</title>
+</head>
+<style>
+    body{
+        background-color: #251669;
+      overflow: hidden;
+      
+    }
+
+    nav a {
+        color: #DB388E;
+    }
+    nav ul{
+        list-style-type: none;
+    }
+   section{
+    top: 0;
+    width: 100%;
+    padding-bottom: 0;
+    padding-top: 50px;
+    background-image: url("../static/images/anim.jpg");
+    background-repeat: no-repeat;
+    background-position: right;
+    /* padding: 50px 0; */
+    }
+ 
+    .white{
+        color: white;
+    }
+    button{
+        background-color: white;
+    }
+    img{
+        width: 732px;
+        height: 320px;
+    }
+    a img{
+        width: 50px;
+        margin: 10px;
+        height: 50px;
+    }
+    img.bottom{
+        margin-top: -100px;
+    }
+    button a{
+      color: white;
+      text-decoration: none;
+    }
+    button a:hover{
+      color: white;
+      text-decoration: none;
+    }
+
+</style>
+<body>
+    <nav class="navbar d-flex justify-content-between">
+        <!-- <a class="navbar-brand" href="#"></a> -->
+        <a class="navbar-brand" href="/">
+            <img src="../static/images/icon.png" width="30" height="30" alt="">Evently
+          </a>
+        <div  >
+          <ul class=" d-flex justify-content-between ">
+            <li class="nav-item ">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+          
+    
+            <li class="nav-item">
+              <a class="nav-link " href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/register">Register</a>
+              </li>
+          </ul>
+        </div>
+      </nav>
+ 
+        <section class="white text-center">
+            <div class="p-5 text-left">
+              <h1 class="white">Catch the latest events!</h1>
+              <p class="lead  white">Discover the best events, picked just for you.<br>
+                Keep track of your liked events and see events from your favorite organizers <br>when you log in.</p>
+              <p>
+                  <button type="button" class="btn btn-secondary"><a href="/login">Login</a></button>
+                  <button type="button" class="btn btn-secondary"><a href="/register">Register</a></button>
+             
+              </p>
+            </div>
+            <img src="../static/images/anim2.jpg">
+          </section>
+          <img class="bottom"src="../static/images/anim3.jpg">
+     
+
+
+  
+    
+</body>
+</html>
