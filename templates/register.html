@@ -35,7 +35,7 @@ form{
   top: 50%;
   left: 50%;
   padding: 20px 50px;
-  margin-top: -250px;
+  margin-top: -350px;
   margin-left: -250px;
 
 }
@@ -60,6 +60,9 @@ button.login{
 form a:hover{
   color: #251669;
   text-decoration: none;
+}
+small.errors{
+  color: white;
 }
 
 
@@ -88,15 +91,57 @@ form a:hover{
           </ul>
         </div>
       </nav>
-      <form class="card d-flex flex-column">
+      <form class="card d-flex flex-column" action='/create-user' method="POST" >
           <h4>Create an account</h4>
-          <input type="text" placeholder="First Name">
-          <input type="text" placeholder="Last Name">
-          <input type="email" placeholder="Email">
-          <input type="password" placeholder="Password">
-          <input type="password" placeholder="Confirm Password">
+          <input name="fname" type="text" placeholder="First Name">
+          {% with name_error = get_flashed_messages(category_filter=["name_error"]) %}
+            {% if name_error %}
+              {%- for msg in name_error %}
+              <small  id="errors"  style="color: white;" class="form-text ">{{ msg }}</small>
+              {% endfor %}
+            {% endif %}
+          {% endwith%}
+          <input name="lname" type="text" placeholder="Last Name">
+          {% with last_error = get_flashed_messages(category_filter=["last_error"]) %}
+          {% if last_error %}
+            {%- for msg in last_error %}
+            <small  id="errors" style="color: white;" class="form-text ">{{ msg }}</small>
+            {% endfor %}
+          {% endif %}
+        {% endwith%}
+          <input name="email" type="email" placeholder="Email">
+          {% with email_error = get_flashed_messages(category_filter=["email_error"]) %}
+          {% if email_error %}
+            {%- for msg in email_error %}
+            <small  id="errors" style="color: white;" class="form-text ">{{ msg }}</small>
+            {% endfor %}
+          {% endif %}
+        {% endwith%}
+          <input name="psw" type="password" placeholder="Password">
+          {% with password = get_flashed_messages(category_filter=["psw_error"]) %}
+          {% if password %}
+            {%- for msg in password %}
+            <small  id="errors"  style="color: white;" class="form-text">{{ msg }}</small>
+            {% endfor %}
+          {% endif %}
+        {% endwith%}
+          <input name="cpsw" type="password" placeholder="Confirm Password">
+          {% with confirm_password = get_flashed_messages(category_filter=["confirm_psw_error"]) %}
+          {% if confirm_password %}
+            {%- for msg in confirm_password %}
+            <small  id="errors"  style="color: white;" class="form-text ">{{ msg }}</small>
+            {% endfor %}
+          {% endif %}
+        {% endwith%}
           <a href="/login">Already have an account?</a>
           <button type="submit" class="btn login">Sign up</button>
+          {% with signup_error = get_flashed_messages(category_filter=["signup_error"]) %}
+          {% if signup_error %}
+              {%- for msg in signup_error %}
+              <small  id="errors" style="color: white;" class="form-text ">{{ msg }}</small>
+              {% endfor %}
+          {% endif %}
+      {% endwith%}
       </form>
     
 </body>
