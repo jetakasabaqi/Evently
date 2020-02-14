@@ -88,12 +88,33 @@ form a:hover{
           </ul>
         </div>
       </nav>
-      <form class="card d-flex flex-column">
+      <form class="card d-flex flex-column" action="/login-user" method="POST">
           <h4>Log in your account</h4>
-          <input type="email" placeholder="Email">
-          <input type="password" placeholder="Password">
+          <input name="email" type="email" placeholder="Email">
+          {% with name_error = get_flashed_messages(category_filter=["email_error"]) %}
+          {% if name_error %}
+            {%- for msg in name_error %}
+            <small  id="errors"  style="color: white;" class="form-text ">{{ msg }}</small>
+            {% endfor %}
+          {% endif %}
+        {% endwith%}
+          <input name="password" type="password" placeholder="Password">
+          {% with name_error = get_flashed_messages(category_filter=["password_error"]) %}
+          {% if name_error %}
+            {%- for msg in name_error %}
+            <small  id="errors"  style="color: white;" class="form-text ">{{ msg }}</small>
+            {% endfor %}
+          {% endif %}
+        {% endwith%}
           <a href="/signup">Create an account</a>
           <button type="submit" class="btn login">Log in</button>
+          {% with name_error = get_flashed_messages(category_filter=["login_error"]) %}
+          {% if name_error %}
+            {%- for msg in name_error %}
+            <small  id="errors"  style="color: white;" class="form-text ">{{ msg }}</small>
+            {% endfor %}
+          {% endif %}
+        {% endwith%}
       </form>
     
 </body>

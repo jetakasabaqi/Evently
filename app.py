@@ -72,6 +72,38 @@ def get_login():
 def get_register():
     return render_template("register.html")
 
+@app.route("/friends")
+def get_friends():
+    return render_template("friends.html")
+
+@app.route("/events")
+def get_events():
+    return render_template("events.html")
+@app.route("/profile")
+def get_profile():
+    return render_template("profile.html")
+
+@app.route("/login-user", methods  =['POST'])
+def login_user():
+    isValid = True
+
+    if len(request.form['email']) < 1:
+        isValid = False
+        flash("Please enter an email","email_error")
+    if len(request.form['password']) <1:
+        isValid = False
+        flash("Please enter a password","password_error")
+    
+    if isValid:
+        user = User.query.filter_by(email =request.form['email']).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, request.form['password']):
+                session['userid'] = user.id
+                return redirect('/dashboard')
+        flash("Email or Password is wrong","login_error")
+    return redirect('/login')
+
+
 @app.route("/create-user", methods = ['POST'])
 def create_user():
     isValid = True
@@ -109,9 +141,17 @@ def create_user():
 @app.route('/dashboard')
 def get_dashboard():
     if 'userid' in session:
-        return render_template('dashboard.html')
+        events = Event.query.all()
+        return render_template('dashboard.html', events = events)
     else :
         return render_template('index.html')
+
+@app.route("/create-event", methods = ['POST'])
+def create_event():
+    event = Event(name=request.form['name'], description = request.form['description'], location = request.form['location'], user_id = session['userid'])
+    db.session.add(event)
+    db.session.commit()
+    return redirect('/profile')
     
 
 

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Profile</title>
+</head>
+<style>
+    nav {
+        background-color: #251669;
+    }
+    
+    nav a {
+        color: #DB388E;
+    }
+    
+    nav ul {
+        list-style-type: none;
+    }
+    
+    .events_created {
+        overflow: auto;
+    }
+    
+    .needs-validation {
+        padding: 25px;
+    }
+</style>
+
+<body>
+    <nav class="navbar d-flex justify-content-between align-items-baseline">
+        <!-- <a class="navbar-brand" href="#"></a> -->
+        <a class="navbar-brand" href="/">
+            <img src="../static/images/icon.png" width="30" height="30" alt="">Evently
+        </a>
+
+        <ul class=" w-50 d-flex justify-content-around align-items-baseline">
+            <li class="nav-item ">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/friends">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/events">Find Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/logout">Logout</a>
+            </li>
+        </ul>
+
+    </nav>
+
+    <div class="profile container">
+        <h3>Jeta Kasabaqi</h3>
+        <h6>Joined on 14 Feb 2020</h6>
+        <p>Events created: 21</p>
+        <p>Events attended: 120</p>
+        <button onclick="document.getElementById('id01').style.display='block'" class="w3-button">Create Event</button>
+    </div>
+    <h3 class="container">Events Created</h3>
+    <div class="events_created container d-flex justify-content-between">
+
+        <div class="card" style="width: 220px;">
+            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Event title</h5>
+                <input type="checkbox" checked disabled>
+                <label>Going</label>
+            </div>
+
+        </div>
+        <div class="card" style="width: 220px;">
+            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Event title</h5>
+                <input type="checkbox" checked disabled>
+                <label>Going</label>
+            </div>
+
+        </div>
+        <div class="card" style="width: 220px;">
+            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Event title</h5>
+                <input type="checkbox" checked disabled>
+                <label>Going</label>
+            </div>
+
+        </div>
+        <div class="card" style="width: 220px;">
+            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Event title</h5>
+                <input type="checkbox" checked disabled>
+                <label>Going</label>
+            </div>
+
+        </div>
+
+    </div>
+    <h3 class="container">Events Attended</h3>
+
+    <div class="events_created container d-flex justify-content-between">
+
+        <div class="card" style="width: 220px;">
+            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Event title</h5>
+                <input type="checkbox" checked disabled>
+                <label>Going</label>
+            </div>
+
+        </div>
+        <div class="card" style="width: 220px;">
+            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Event title</h5>
+                <input type="checkbox" checked disabled>
+                <label>Going</label>
+            </div>
+
+        </div>
+        <div class="card" style="width: 220px;">
+            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Event title</h5>
+                <input type="checkbox" checked disabled>
+                <label>Going</label>
+            </div>
+
+        </div>
+        <div class="card" style="width: 220px;">
+            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Event title</h5>
+                <input type="checkbox" checked disabled>
+                <label>Going</label>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+            <div class="w3-container">
+                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <form class="needs-validation" action="/create-event" method="POST">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationTooltip01">Event Name</label>
+                            <input type="text" class="form-control" id="validationTooltip01" placeholder="Event name" name="name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationTooltip03">Location</label>
+                            <input type="text" class="form-control" id="validationTooltip03" placeholder="Location"  name="location" required>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationTooltip02">Description</label>
+                            <textarea class="form-control" id="validationTooltip02" name="description" placeholder="Events details" required rows="5"></textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

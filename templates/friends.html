@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Friends</title>
+</head>
+<style>
+    nav{
+        background-color: #251669;
+    }
+    nav a {
+        color: #DB388E;
+    }
+    nav ul{
+        list-style-type: none;
+    }
+    .friend{
+      padding: 20px;
+      background-color: rgb(214, 206, 206);
+      border: 1px solid grey;
+      width: 49%;
+      margin-bottom: 5px;
+      margin-top: 5px;
+     
+    }
+  
+    </style>
+<body>
+    <nav class="navbar d-flex justify-content-between align-items-baseline">
+        <!-- <a class="navbar-brand" href="#"></a> -->
+        <a class="navbar-brand" href="/">
+            <img src="../static/images/icon.png" width="30" height="30" alt="">Evently
+          </a>
+     
+          <ul class=" w-50 d-flex justify-content-around align-items-baseline">
+            <li class="nav-item ">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="/friends">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/events">Find Events</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/profile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/logout">Logout</a>
+              </li>
+          </ul>
+      
+      </nav>
+
+    
+      <div class="friends container">
+         <h2>Friends List</h2>
+         <div class="row d-flex justify-content-between align-items-center"> 
+            <div class="friend   d-flex  align-items-center justify-content-between">
+              <h4>Jeta Kasabaqi</h4>
+            <button><a href="/unfriend">Unfriend</a></button>
+            </div>
+            <div class="friend  d-flex  align-items-center justify-content-between">
+              <h4>Rina Kasabaqi</h4>
+              <button><a href="/unfriend">Unfriend</a></button>
+            </div>
+      </div>
+      <div class="row d-flex justify-content-between align-items-center"> 
+        <div class="friend  d-flex  align-items-center justify-content-between">
+          <h4>Jeta Kasabaqi</h4>
+        <button><a href="/unfriend">Unfriend</a></button>
+        </div>
+        <div class="friend  d-flex  align-items-center justify-content-between">
+          <h4>Rina Kasabaqi</h4>
+          <button><a href="/unfriend">Unfriend</a></button>
+        </div>
+  </div>
+  <div class="row d-flex justify-content-between align-items-center"> 
+    <div class="friend   d-flex  align-items-center justify-content-between">
+      <h4>Jeta Kasabaqi</h4>
+    <button><a href="/unfriend">Unfriend</a></button>
+    </div>
+    <div class="friend d-flex  align-items-center justify-content-between">
+      <h4>Rina Kasabaqi</h4>
+      <button><a href="/unfriend">Unfriend</a></button>
+    </div>
+</div>
+<div class="row d-flex justify-content-between align-items-center"> 
+  <div class="friend d-flex  align-items-center justify-content-between">
+    <h4>Jeta Kasabaqi</h4>
+  <button><a href="/unfriend">Unfriend</a></button>
+  </div>
+  <div class="friend  d-flex  align-items-center justify-content-between">
+    <h4>Rina Kasabaqi</h4>
+    <button><a href="/unfriend">Unfriend</a></button>
+  </div>
+</div>
+       
+
+
+
+
+      </div>
+</body>
+</html>
