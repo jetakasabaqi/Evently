@@ -113,19 +113,39 @@ def unfriend(user_id):
 def get_events():
     if 'userid' not in session:
         return redirect('/')
-    
+    user = User.query.filter_by(id = session['userid']).first()
+    users = User.query.all()
+    users_following = user.users_this_user_is_following
     events = Event.query.all()
+    users_ids = [user.id for user in users]
+#only show events from users not following
+    for user in users:
+        if user in users_following:
+            users.remove(user)
+    
+
+
+    for event in events:
+        if event.user_id in users_ids:
+            events.remove(event)
+            
+    for event in events:
+        if event.user_id == session['userid']:
+            events.remove(event)
+       
     return render_template("events.html", events = events)
 
 @app.route("/profile")
 def get_profile():
     if 'userid' not in session:
         return redirect('/')
+  
     user = User.query.filter_by(id = session['userid']).first()
     events_created = Event.query.filter_by(user_id = session['userid']).all()
     events_attended = user.events_this_user_interest
+    
 
-    return render_template("profile.html", user = user, events_created = events_created,events_attended = events_attended)
+    return render_template("profile.html", user = user, events_created = events_created,events_attended = events_attended, events_created_count = len(events_created),events_attended_count = len(events_created))
 
 @app.route("/login-user", methods  =['POST'])
 def login_user():
@@ -189,21 +209,25 @@ def get_dashboard():
         user = User.query.filter_by(id = session['userid']).first()
 
         events_with_status = db.session.execute(f"select * from interest where user_id ={session['userid']}")
-        
+        users_following = user.users_this_user_is_following
+
         for event_status in events_with_status:
             for event in events:
                 if event_status.event_id == event.id:
                     event.interes = event_status.status
-            
-     
-      
+
+        for event in events:
+            if event.user_id not in [user.id for user in users_following] and event.user_id != session['userid']:
+                events.remove(event)
+                
         return render_template('dashboard.html', events = events)
     else :
         return render_template('index.html')
 
 @app.route("/create-event", methods = ['POST'])
 def create_event():
-    event = Event(name=request.form['name'], description = request.form['description'], location = request.form['location'], user_id = session['userid'])
+    event = Event(name=request.form['name'], description = request.form['description'], location = request.form['location'], entry = request.form['entry'],event_date =    datetime.strptime(request.form['date'], '%Y-%m-%d'),user_id = session['userid'])
+ 
     db.session.add(event)
     db.session.commit()
     return redirect('/profile')

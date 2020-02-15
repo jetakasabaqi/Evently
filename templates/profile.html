@@ -61,12 +61,13 @@
     <div class="profile container">
         <h3>{{user.fname}} {{user.lname}}</h3>
         <h6>Joined on {{user.created_at}}</h6>
-        <p>Events created: 21</p>
-        <p>Events attended: 120</p>
+        
+        <p>Events created: {{events_created_count}}</p>
+        <p>Events attended: {{events_attended_count}}</p>
         <button class='btn btn-primary' onclick="document.getElementById('id01').style.display='block'" class="w3-button">Create Event</button>
     </div>
     <h3 class="container">Events Created</h3>
-    <div class="events_created container d-flex justify-content-between">
+    <div class="events_created container d-flex justify-content-start">
         {% for event_created in events_created:%}
         <div class="card" style="width: 220px;">
             <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
@@ -117,6 +118,15 @@
                         <div class="col-md-6 mb-3">
                             <label for="validationTooltip03">Location</label>
                             <input type="text" class="form-control" id="validationTooltip03" placeholder="Location"  name="location" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationTooltip03">Entry</label>
+                            <input type="text" class="form-control" id="validationTooltip03" placeholder="Free"  name="entry" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationTooltip03">Date and Time</label>
+                            <input type="date" id="start"  class="form-control"  name="date" required>
+                            
                         </div>
 
                     </div>
