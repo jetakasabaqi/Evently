@@ -46,6 +46,8 @@ class Event(db.Model):
     name = db.Column(db.String(45))
     description = db.Column(db.String(255))
     location = db.Column(db.String(255))
+    entry = db.Column(db.String(255))
+    event_date = db.Column(db.DateTime, server_default = func.now())
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'), nullable = False)
     user = db.relationship('User', foreign_keys =[user_id])
     created_at = db.Column(db.DateTime, server_default = func.now())
@@ -74,14 +76,56 @@ def get_register():
 
 @app.route("/friends")
 def get_friends():
-    return render_template("friends.html")
+    if 'userid' not in session:
+        return redirect('/')
+    users = User.query.all()
+    this_user = User.query.filter_by(id = session['userid']).first()
+
+    users_following = this_user.users_this_user_is_following
+
+    for user in users:
+        print(user.id)
+        print([user.id for user in users_following])
+        if user.id in [user.id for user in users_following]:
+            user.following= True
+            print(user.following)
+ 
+    users.remove(this_user)
+   
+    return render_template("friends.html", users = users)
+@app.route("/add-friend/<user_id>")
+def add_friend(user_id):
+    user = User.query.filter_by(id = session['userid']).first()
+    new_friend = User.query.filter_by(id = user_id).first()
+    user.users_this_user_is_following.append(new_friend)
+    db.session.commit()
+    return redirect('/friends')
+
+@app.route("/unfriend/<user_id>")
+def unfriend(user_id):
+    user = User.query.filter_by(id = session['userid']).first()
+    the_friend = User.query.filter_by(id = user_id).first()
+    user.users_this_user_is_following.remove(the_friend)
+    db.session.commit()
+    return redirect('/friends')
 
 @app.route("/events")
 def get_events():
-    return render_template("events.html")
+    if 'userid' not in session:
+        return redirect('/')
+    
+    events = Event.query.all()
+    return render_template("events.html", events = events)
+
 @app.route("/profile")
 def get_profile():
-    return render_template("profile.html")
+    if 'userid' not in session:
+        return redirect('/')
+    user = User.query.filter_by(id = session['userid']).first()
+    events_created = Event.query.filter_by(user_id = session['userid']).all()
+    events_attended = user.events_this_user_interest
+
+    return render_template("profile.html", user = user, events_created = events_created,events_attended = events_attended)
 
 @app.route("/login-user", methods  =['POST'])
 def login_user():
@@ -142,6 +186,17 @@ def create_user():
 def get_dashboard():
     if 'userid' in session:
         events = Event.query.all()
+        user = User.query.filter_by(id = session['userid']).first()
+
+        events_with_status = db.session.execute(f"select * from interest where user_id ={session['userid']}")
+        
+        for event_status in events_with_status:
+            for event in events:
+                if event_status.event_id == event.id:
+                    event.interes = event_status.status
+            
+     
+      
         return render_template('dashboard.html', events = events)
     else :
         return render_template('index.html')
@@ -152,9 +207,26 @@ def create_event():
     db.session.add(event)
     db.session.commit()
     return redirect('/profile')
+
+@app.route("/interest", methods = ['POST'])
+def interest_event():
+    string = request.form['value']
+    interes = string[0]
+    event_id = string[1]
+    event = Event.query.filter_by(id  = event_id).first()
+    user = User.query.filter_by(id  = event_id).first()
+    if event in user.events_this_user_interest:
+         db.session.execute(interests.update().values(user_id=session['userid'],event_id=event_id, status = interes))
+    else:
+        db.session.execute(interests.insert().values(user_id=session['userid'],event_id=event_id, status = interes))
+    db.session.commit()
+    return redirect('/')
     
 
-
+@app.route('/logout')
+def logout_user():
+    session.clear()
+    return redirect('/')
 
 
 if __name__ == "__main__":

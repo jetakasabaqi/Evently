@@ -58,51 +58,19 @@
     
       <div class="friends container">
          <h2>Friends List</h2>
+      {% for user in users:%}
          <div class="row d-flex justify-content-between align-items-center"> 
             <div class="friend   d-flex  align-items-center justify-content-between">
-              <h4>Jeta Kasabaqi</h4>
-            <button><a href="/unfriend">Unfriend</a></button>
-            </div>
-            <div class="friend  d-flex  align-items-center justify-content-between">
-              <h4>Rina Kasabaqi</h4>
-              <button><a href="/unfriend">Unfriend</a></button>
+              <h4>{{user.fname}} {{user.lname}}</h4>
+        
+              {% if user.following == True%}
+            <button><a href="/unfriend/{{user.id}}">Unfriend</a></button>
+            {%else%}
+            <button><a href="/add-friend/{{user.id}}">Add friend</a></button>
+            {%endif%}
             </div>
       </div>
-      <div class="row d-flex justify-content-between align-items-center"> 
-        <div class="friend  d-flex  align-items-center justify-content-between">
-          <h4>Jeta Kasabaqi</h4>
-        <button><a href="/unfriend">Unfriend</a></button>
-        </div>
-        <div class="friend  d-flex  align-items-center justify-content-between">
-          <h4>Rina Kasabaqi</h4>
-          <button><a href="/unfriend">Unfriend</a></button>
-        </div>
-  </div>
-  <div class="row d-flex justify-content-between align-items-center"> 
-    <div class="friend   d-flex  align-items-center justify-content-between">
-      <h4>Jeta Kasabaqi</h4>
-    <button><a href="/unfriend">Unfriend</a></button>
-    </div>
-    <div class="friend d-flex  align-items-center justify-content-between">
-      <h4>Rina Kasabaqi</h4>
-      <button><a href="/unfriend">Unfriend</a></button>
-    </div>
-</div>
-<div class="row d-flex justify-content-between align-items-center"> 
-  <div class="friend d-flex  align-items-center justify-content-between">
-    <h4>Jeta Kasabaqi</h4>
-  <button><a href="/unfriend">Unfriend</a></button>
-  </div>
-  <div class="friend  d-flex  align-items-center justify-content-between">
-    <h4>Rina Kasabaqi</h4>
-    <button><a href="/unfriend">Unfriend</a></button>
-  </div>
-</div>
-       
-
-
-
-
+      {%endfor%}
       </div>
 </body>
 </html>

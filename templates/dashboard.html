@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <title>Home</title>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous">
+    </script>
+    <script src="{{ url_for('static', filename='scripts/dashboard.js') }}"></script>
 </head>
 <style>
     nav{
@@ -67,27 +73,29 @@
               <div class="card-body">
                 <h5 class="card-title">{{event.name}}</h5>
                 <p class="card-text">{{event.description}}</p>
+                {{event.interes}}
               </div>
     
             </div>
             <div class="col-md-12">
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">Entry: Free</li>
-                <li class="list-group-item">14 February 2020</li>
+                <li class="list-group-item">Entry: {{event.entry}}</li>
+                <li class="list-group-item">{{event.event_date}}</li>
                 <li class="list-group-item">@ {{event.location}}</li>
+                <li class="list-group-item">Created by: {{event.user.fname}} {{event.user.lname}}</li>
               </ul>
               <div class="card-body d-flex justify-content-around">
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Going</label>
+                    <input type="radio" class="form-radio-input" name="interest{{event.id}}" value="g{{event.id}}" {% if event.interes == 'g':%} checked=true {%endif%}}>
+                    <label class="form-check-label"  >Going</label>
                   </div>
                   <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Interested</label>
+                    <input type="radio" class="form-radio-input" name="interest{{event.id}}"  value="i{{event.id}}"{% if event.interes == 'i':%} checked=true  {%endif%}} >
+                    <label class="form-check-label" >Interested</label>
                   </div>
                   <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Not Interested</label>
+                    <input type="radio" class="form-radio-input"  name="interest{{event.id}}"  value="n{{event.id}}" {% if event.interes == 'n':%} checked=true  {%endif%}}>
+                    <label class="form-check-label" >Not Interested</label>
                   </div>
        
           
@@ -95,35 +103,6 @@
             </div>
           </div>
         </div>
-          <!-- <div class="card d-flex" style="width: 25rem;" >
-              <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{event.name}}</h5>
-                <p class="card-text">{{event.description}}</p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Entry: Free</li>
-                <li class="list-group-item">14 February 2020</li>
-                <li class="list-group-item">@ {{event.location}}</li>
-              </ul>
-              <div class="card-body d-flex justify-content-between">
-                  <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Going</label>
-                    </div>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Interested</label>
-                    </div>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Not Interested</label>
-                    </div>
-         
-            
-            </div>
-          
-        </div> -->
         {%endfor%}
         </div>
     

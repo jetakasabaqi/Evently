@@ -59,96 +59,50 @@
     </nav>
 
     <div class="profile container">
-        <h3>Jeta Kasabaqi</h3>
-        <h6>Joined on 14 Feb 2020</h6>
+        <h3>{{user.fname}} {{user.lname}}</h3>
+        <h6>Joined on {{user.created_at}}</h6>
         <p>Events created: 21</p>
         <p>Events attended: 120</p>
-        <button onclick="document.getElementById('id01').style.display='block'" class="w3-button">Create Event</button>
+        <button class='btn btn-primary' onclick="document.getElementById('id01').style.display='block'" class="w3-button">Create Event</button>
     </div>
     <h3 class="container">Events Created</h3>
     <div class="events_created container d-flex justify-content-between">
-
+        {% for event_created in events_created:%}
         <div class="card" style="width: 220px;">
             <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Event title</h5>
+                <h5 class="card-title">{{event_created.name}}</h5>
                 <input type="checkbox" checked disabled>
                 <label>Going</label>
             </div>
 
         </div>
-        <div class="card" style="width: 220px;">
-            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Event title</h5>
-                <input type="checkbox" checked disabled>
-                <label>Going</label>
-            </div>
+        {%endfor%}
 
-        </div>
-        <div class="card" style="width: 220px;">
-            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Event title</h5>
-                <input type="checkbox" checked disabled>
-                <label>Going</label>
-            </div>
-
-        </div>
-        <div class="card" style="width: 220px;">
-            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Event title</h5>
-                <input type="checkbox" checked disabled>
-                <label>Going</label>
-            </div>
-
-        </div>
 
     </div>
     <h3 class="container">Events Attended</h3>
 
-    <div class="events_created container d-flex justify-content-between">
+    <div class="events_created container d-flex justify-content-start">
 
+        {% for event in events_attended:%}
         <div class="card" style="width: 220px;">
             <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Event title</h5>
+                <h5 class="card-title">{{event.name}}</h5>
                 <input type="checkbox" checked disabled>
                 <label>Going</label>
             </div>
 
         </div>
-        <div class="card" style="width: 220px;">
-            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Event title</h5>
-                <input type="checkbox" checked disabled>
-                <label>Going</label>
-            </div>
-
+        {%endfor%}
         </div>
-        <div class="card" style="width: 220px;">
-            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Event title</h5>
-                <input type="checkbox" checked disabled>
-                <label>Going</label>
-            </div>
+ 
 
-        </div>
-        <div class="card" style="width: 220px;">
-            <img src="../static/images/anim.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Event title</h5>
-                <input type="checkbox" checked disabled>
-                <label>Going</label>
-            </div>
+        
 
-        </div>
-
-    </div>
-    </div>
+  
+    
 
     <div id="id01" class="w3-modal">
         <div class="w3-modal-content">
